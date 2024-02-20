@@ -1,13 +1,16 @@
 # Applied_ML
 
 
-This is my submission to the Assignment 1 of the Applied Machine Learning course.
+This is my submission to the Assignments in the Applied Machine Learning course.
+
+
+## Assignment 1
 
 It involves working on a spam classification dataset, where we have to preprocess on this dataset, create train, validation and test dataset from it and apply Machine Learning models on them to create a spam classifier, i.e., classifying whether a message is spam or a ham (not spam). This involves fitting three models to it.
 
-### Naive Bayes
-### Logistic Regression
-### Random Forest Classifier
+#### Naive Bayes
+#### Logistic Regression
+#### Random Forest Classifier
 
 Then, a grid search is applied (wherever necessary) for the f1 score (to optimize both precision and recall).
 
