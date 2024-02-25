@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1708885893730
+current_stage: None
+description: null
+last_updated_timestamp: 1708885893730
+name: Random Forest model
+run_id: e59421c3152f4a3e938e09a1d7692e15
+run_link: null
+source: file:///C:/Users/Hp/Desktop/Applied_ML/Assignment%202/mlruns/0/e59421c3152f4a3e938e09a1d7692e15/artifacts/sklearn-model
+status: READY
+status_message: null
+storage_location: file:///C:/Users/Hp/Desktop/Applied_ML/Assignment%202/mlruns/0/e59421c3152f4a3e938e09a1d7692e15/artifacts/sklearn-model
+user_id: null
+version: 1

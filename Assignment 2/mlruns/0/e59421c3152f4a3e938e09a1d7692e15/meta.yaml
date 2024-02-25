@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Hp/Desktop/Applied_ML/Assignment%202/mlruns/0/e59421c3152f4a3e938e09a1d7692e15/artifacts
+end_time: 1708885898977
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e59421c3152f4a3e938e09a1d7692e15
+run_name: Random Forest
+run_uuid: e59421c3152f4a3e938e09a1d7692e15
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1708885883563
+status: 3
+tags: []
+user_id: Hp

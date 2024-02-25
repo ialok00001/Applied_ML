@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Hp/Desktop/Applied_ML/Assignment%202/mlruns/0/19296c1491ff417fb1abbe5bc545d2ed/artifacts
+end_time: 1708885868082
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 19296c1491ff417fb1abbe5bc545d2ed
+run_name: Naive Bayes
+run_uuid: 19296c1491ff417fb1abbe5bc545d2ed
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1708885850553
+status: 3
+tags: []
+user_id: Hp

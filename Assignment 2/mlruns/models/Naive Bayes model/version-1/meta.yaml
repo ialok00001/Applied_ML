@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1708885863420
+current_stage: None
+description: null
+last_updated_timestamp: 1708885863420
+name: Naive Bayes model
+run_id: 19296c1491ff417fb1abbe5bc545d2ed
+run_link: null
+source: file:///C:/Users/Hp/Desktop/Applied_ML/Assignment%202/mlruns/0/19296c1491ff417fb1abbe5bc545d2ed/artifacts/sklearn-model
+status: READY
+status_message: null
+storage_location: file:///C:/Users/Hp/Desktop/Applied_ML/Assignment%202/mlruns/0/19296c1491ff417fb1abbe5bc545d2ed/artifacts/sklearn-model
+user_id: null
+version: 1
