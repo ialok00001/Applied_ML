@@ -1,6 +1,10 @@
 import pytest
 from score import score
 import pickle
+import requests
+import os
+import time
+import subprocess
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -75,3 +79,23 @@ def test_obvious_non_spam_gives_prediction_0():
     threshold = 0.4
     prediction, _ = score(text, model, threshold)
     assert prediction == 0
+
+
+
+def test_flask():
+
+    process = subprocess.Popen(["python", "Assignment 3/app.py"], stdout=subprocess.PIPE)
+
+    time.sleep(2)
+
+    payload = {"text": "Hello, congratulations! You have won a prize."}
+    response = requests.post("http://127.0.0.1:5000/", data=payload)
+
+    assert response.status_code == 200
+
+    data = response.json()
+    assert 'prediction' in data
+    assert 'propensity' in data
+
+    process.terminate()
+
