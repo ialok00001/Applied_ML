@@ -1,0 +1,11 @@
+Name                    Stmts   Miss  Cover   Missing
+-----------------------------------------------------
+Assignment 3\score.py       8      0   100%
+Assignment 3\test.py       74      4    95%   18-19, 32-33
+-----------------------------------------------------
+TOTAL                      82      4    95%
+
+
+
+
+Remark: 18-19 and 32-33 corresponds to exceptions raised, not assert. Hence not covered in test.py
