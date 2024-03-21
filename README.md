@@ -17,3 +17,5 @@ Then, a grid search is applied (wherever necessary) for the f1 score (to optimiz
 At the end, models are compared based on accuracy and f1 score. Sometimes where there these metrics are similar, the decision metric goes to precision. This is because in spam classification, marking a ham as spam is more expensive as in this case the reciever might not get an important message. Hence we need to minimize False Positives, i.e, maximize Precision.
 
 $$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}$$
+
+There are also Assignments 2, 3 and 4.
