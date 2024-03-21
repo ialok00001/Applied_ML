@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore")
 app = Flask(__name__)
 
 
-model = pickle.load(open("Assignment 3/model.pkl", "rb"))
+model = pickle.load(open("model.pkl", "rb"))
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -61,4 +61,4 @@ def home():
         """
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port = 5000)
