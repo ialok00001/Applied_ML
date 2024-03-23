@@ -15,7 +15,7 @@ def test_smoke_test():
     try:
         score("Example", model, 0.5)
     except Exception as e:
-        pytest.fail(f"score function raised an exception: {e} (Smoke test failed)")
+        raise AssertionError(f"score function raised an exception: {e} (Smoke test failed)")
     
     assert type(score("Example", model, 0.5)) == tuple, f"Expected 2 outputs, received 1 (smoke test failed)"
     assert len(score("Example", model, 0.5)) == 2, f"Expected 2 outputs, received {len(score('Example', model, 0.5))} (smoke test failed)"
@@ -29,7 +29,7 @@ def test_format_test():
     try:
         float(probability)
     except Exception as e:
-        pytest.fail(f"score function raised an exception: {e} (Format test failed)")
+        raise AssertionError(f"score function raised an exception: {e} (Format test failed)")
 
 def test_prediction_0_or_1():
     text = "Example"
