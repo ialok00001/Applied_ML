@@ -1,91 +1,104 @@
-# import subprocess
-# import requests
-# import time
-# import os
-# os.chdir("Assignment 4")
-
-# def test_docker():
-#     # Build Docker image
-#     subprocess.run(['docker', 'build', '-t', 'spam-classifier', '.'])
-#     subprocess.Popen(['docker', 'run', '-d', '-p', '5000:5000', 'spam-classifier'])
-#     time.sleep(2)
-    
-#     response = requests.post('http://localhost:5000', data={'text': 'Sample text'})
-#     assert response.status_code == 200
-
-#     container_id = subprocess.check_output(['docker', 'ps', '-q'], text=True).strip()
-#     subprocess.Popen(['docker', 'stop', container_id])
-
-# if __name__ == "__main__":
-#     test_docker()
-
-
-# import os
-# import requests
-# import time
-# import subprocess
-
-# def test_docker():
-#     # Build Docker image
-#     subprocess.run(['docker', 'build', '-t', 'spam-classifier', 'Assignment 4'])
-
-#     # Run Docker container
-#     docker_run_process = subprocess.Popen(['docker', 'run', '-d', '-p', '5000:5000', 'spam-classifier'])
-
-#     # Allow some time for the container to start
-#     time.sleep(2)
-
-#     try:
-#         # Send a request to the /score endpoint
-#         response = requests.post('http://localhost:5000', data={'text': 'Your sample text here'})
-
-#         # Check if the response is as expected
-#         if response.status_code == 200:
-#             print("Response:", response.json())
-#             # Add your assertions here to check the response content
-
-#     finally:
-#         # Close the Docker container
-#         subprocess.run(['docker', 'stop', docker_run_process.stdout.decode().strip()])
-
-
-
-
-# import os
-# import subprocess
-# import requests
-# import time
-
-
-# def test_docker():
-    
-    
-#     # Build the Docker image
-#     subprocess.run(["docker", "build", "-t", "spam-classifier", "Assignment 4"])
-
-#     # Run the Docker container
-#     subprocess.run(["docker", "run", "-d", "-p", "5000:5000", "--name", "spam-container", "spam-classifier"])
-
-#     # Send a request to the localhost endpoint /score
-#     response = requests.post("http://localhost:5000", data={"text": "sample_text"}, timeout=20)
-
-#     # Check if the response is as expected
-#     assert response.status_code == 200
-
-#     # Close the Docker container
-#     subprocess.run(["docker", "stop", "spam-container"])
-#     subprocess.run(["docker", "rm", "spam-container"])
-#     subprocess.run(["docker", "rmi", "spam-classifier"])
-
-# if __name__ == "__main__":
-#     test_docker()
-
-
-
+from score import score
+import pickle
 import time
 import requests
 import subprocess
 import os
+import warnings
+warnings.filterwarnings("ignore")
+
+
+model = pickle.load(open("Assignment 4/model.pkl", "rb"))
+
+
+def test_smoke_test():
+    try:
+        score("Example", model, 0.5)
+    except Exception as e:
+        pytest.fail(f"score function raised an exception: {e} (Smoke test failed)")
+    
+    assert type(score("Example", model, 0.5)) == tuple, f"Expected 2 outputs, received 1 (smoke test failed)"
+    assert len(score("Example", model, 0.5)) == 2, f"Expected 2 outputs, received {len(score('Example', model, 0.5))} (smoke test failed)"
+
+def test_format_test():
+    text = "Example"
+    threshold = 0.7
+    prediction, probability = score(text, model, threshold)
+    assert type(prediction) == int
+    
+    try:
+        float(probability)
+    except Exception as e:
+        pytest.fail(f"score function raised an exception: {e} (Format test failed)")
+
+def test_prediction_0_or_1():
+    text = "Example"
+    threshold = 0.7
+    prediction, _ = score(text, model, threshold)
+    assert prediction in (0, 1)
+
+def test_propensity_between_0_and_1():
+    text = "Example"
+    threshold = 0.7
+    _, propensity = score(text, model, threshold)
+    assert 0<=propensity<=1
+
+def test_when_threshold_0_prediction_always_1():
+    text_1 = "Be there tonight"
+    threshold = 0
+    prediction, _ = score(text_1, model, threshold)
+    assert prediction == 1
+    
+    text_2 = "Get a chance to go on a vacation to Hawaii"
+    threshold = 0
+    prediction, _ = score(text_2, model, threshold)
+    assert prediction == 1
+
+def test_when_threshold_1_prediction_always_0():
+    text_1 = "Be there tonight"
+    threshold = 1
+    prediction, _ = score(text_1, model, threshold)
+    assert prediction == 0
+    
+    text_2 = "Get a chance to go on a vacation to Hawaii"
+    threshold = 1
+    prediction, _ = score(text_2, model, threshold)
+    assert prediction == 0
+
+def test_obvious_spam_gives_prediction_1():
+    text = '''Just apply to this lucky draw and get a chance to send
+              your child to foreign universities like Stanford and Harvard. Don't be late. 
+              Offer valid for a limited time only.'''
+    threshold = 0.7
+    prediction, _ = score(text, model, threshold)
+    assert prediction == 1
+
+def test_obvious_non_spam_gives_prediction_0():
+    text = "Don't be late for tomorrow's meeting"
+    threshold = 0.4
+    prediction, _ = score(text, model, threshold)
+    assert prediction == 0
+
+
+
+def test_flask():
+
+    process = subprocess.Popen(["python", "Assignment 4/app.py"], stdout=subprocess.PIPE)
+
+    time.sleep(2)
+
+    payload = {"text": "Hello, congratulations! You have won a prize."}
+    response = requests.post("http://localhost:5000/", data=payload)
+
+    assert response.status_code == 200
+
+    data = response.json()
+    assert 'prediction' in data
+    assert 'propensity' in data
+
+    process.terminate()
+
+
 
 def wait_for_container_ready():
     max_retries = 10
