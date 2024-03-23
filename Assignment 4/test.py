@@ -117,11 +117,11 @@ def test_docker():
     # Wait for the container to be ready
     if wait_for_container_ready():
         print("Test passed!")
-        with open(os.path.join("Assignment 4", "test_results.txt"), "w") as f:
+        with open(os.path.join("Assignment 4", "test_results.txt"), "a") as f:
             f.write("Test passed!\n")
     else:
         print("Test failed!")
-        with open(os.path.join("Assignment 4", "test_results.txt"), "w") as f:
+        with open(os.path.join("Assignment 4", "test_results.txt"), "a") as f:
             f.write("Test failed!\n")
 
     # Close the Docker container
