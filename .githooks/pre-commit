@@ -9,7 +9,3 @@ else
     echo "Tests failed. Commit aborted."
     exit 1
 fi
-
-
-
-Note : This is just the .txt file for pre-commit that is created as .githooks/pre-commit.
