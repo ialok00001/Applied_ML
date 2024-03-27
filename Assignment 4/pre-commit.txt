@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Run tests before allowing commit
+if python "Assignment 4/test.py"; then
+    echo "Tests passed. Committing changes..."
+    git add "Assignment 4/test_results.txt"
+    git commit --no-verify -m "Add test results"
+else
+    echo "Tests failed. Commit aborted."
+    exit 1
+fi
+
+
+
+Note : This is just the .txt file for pre-commit that is created as .git/hooks/pre-commit.
