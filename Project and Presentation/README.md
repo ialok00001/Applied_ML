@@ -6,4 +6,4 @@ This is our submission to the final project and submission for the course. The p
 4) Sayantika Sengupta
 
 
-Since the models used are a bit bigger in size, they are save to some other remote server, which can be accessed from the link [here](www.google.com).
+Since the test video used is a bit bigger in size (even larger than the used model), it is saved to some other remote server, which can be accessed from the link [here](www.google.com).
